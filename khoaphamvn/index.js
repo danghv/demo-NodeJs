@@ -24,7 +24,7 @@ app.get('/sinhvien/list', (req, res) => {
         if (err) {
             return console.error('error fetching client from pool', err)
         }
-        client.query('SELECT * FROM sinhvien', (err, result) => {
+        client.query('SELECT * FROM sinhvien ORDER BY id', (err, result) => {
             done()
             if (err) {
                 res.end();
@@ -43,8 +43,6 @@ app.get('/sinhvien/them', (req, res) => {
 })
 app.post('/sinhvien/them', urlencodedParser, (req, res) => {
     //insert db
-    
-
     pool.connect((err, client, done) => {
         if (err) {
             return console.error('error fetching client from pool', err)
@@ -68,4 +66,69 @@ app.post('/sinhvien/them', urlencodedParser, (req, res) => {
 
 app.get('/', (req, res) => {
     res.render('main')
+})
+
+app.get('/sinhvien/sua/:id', (req, res) => {
+    let id = req.params.id;
+    pool.connect((err, client, done) => {
+        if (err) {
+            return console.error('error fetching client from pool', err)
+        }
+        client.query("SELECT * FROM sinhvien WHERE id = '"+id+"'", (err, result) => {
+            done()
+            if (err) {
+                res.end();
+                return console.error('error running query', err)
+            }
+            // console.log(result.rows[0].hoten)
+            // console.log(result)
+            res.render('sinhvien_edit.ejs', {sv: result.rows[0]});
+        })
+        })
+
+
+    
+})
+
+app.post('/sinhvien/sua/', urlencodedParser, (req, res) => {
+    let hoten = req.body.txtHoten;
+    let email = req.body.txtEmail;
+    let id = req.body.txtId;
+    pool.connect((err, client, done) => {
+        if (err) {
+            return console.error('error fetching client from pool', err)
+        }
+        client.query("UPDATE sinhvien SET hoten = '"+ hoten +"', email = '"+ email +"' WHERE id = '"+ id +"'", (err, result) => {
+            done()
+            if (err) {
+                res.end();
+                return console.error('error running query', err)
+            }
+            // console.log(result.rows[0].hoten)
+            // console.log(result)
+            // res.render('sinhvien_edit.ejs', {sv: result.row[0]});
+            res.redirect('../sinhvien/list')
+        })
+        })
+
+})
+
+app.get('/sinhvien/xoa/:id', (req, res) => {
+    let id = req.params.id;
+    pool.connect((err, client, done) => {
+        if (err) {
+            return console.error('error fetching client from pool', err)
+        }
+        client.query("DELETE FROM sinhvien WHERE id = '"+ id +"'", (err, result) => {
+            done()
+            if (err) {
+                res.end();
+                return console.error('error running query', err)
+            }
+            // console.log(result.rows[0].hoten)
+            // console.log(result)
+            // res.render('sinhvien_edit.ejs', {sv: result.row[0]});
+            res.redirect('../../sinhvien/list')
+        })
+        })
 })
