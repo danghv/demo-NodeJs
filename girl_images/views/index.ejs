@@ -1,0 +1,41 @@
+<% 
+    var truoc, sau;
+    if (dangxem <= 1) {
+         truoc = 1;
+    }else {
+        truoc = parseInt(dangxem) - 1;
+    }
+    if (dangxem >= max) {
+        sau = max;
+    }else {
+        sau = parseInt(dangxem) + 1;
+    }
+
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:3000/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>hot girls</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+   
+    <div id="hotgirl">
+        <a id="truoc" href="./hotgirls/<%= truoc %>">Truoc</a>
+        <a id="sau" href="./hotgirls/<%= sau %>">Sau</a>
+        <div class="block"></div>
+        <img id="hinhHG" src="images/<%= hinh %>">
+        <a id="dislike" href="./dislike/:id">
+            <img src="images/dislike.png" alt="">
+        </a>
+        <a id="like" href="./like/:id">
+            <img src="images/like.jpeg" alt="">
+        </a>
+    </div>
+</body>
+</html>

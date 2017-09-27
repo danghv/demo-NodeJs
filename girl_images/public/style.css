@@ -1,0 +1,25 @@
+#hotgirl {
+    width: 50%;
+    margin: auto;
+    /* background: green; */
+}
+#truoc {
+    float: left;
+
+}
+#sau {
+    float: right;
+}
+#truoc:hover, #sau:hover {
+    color: blue;
+}
+.block {
+    width: 100%;
+    clear: both;
+}
+#dislike {
+    float: left;
+}
+#like {
+    float: right;
+}
