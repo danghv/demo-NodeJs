@@ -1,6 +1,7 @@
 const http = require('http')
 const formidable = require('formidable')
 const fs = require('fs')
+const url = require('url')
 http.createServer((req, res) => {
     if (req.url == '/upload' && req.method.toLowerCase() == 'post') {
         //parse a file upload
@@ -24,6 +25,14 @@ http.createServer((req, res) => {
     }
     
         res.writeHead(200, {'Content-Type': 'text/html'})
+        // res.write(req.url)
+        // console.log(req.url)
+        console.log(url)
+        let q = url.parse(req.url, true).query
+        let txt = q.year + " " + q.month
+        // console.log(q)
+        // console.log(txt)
+        res.write(txt)
         res.write('<form action="/upload" method="post" enctype="multipart/form-data" ' + 
                     '<input type="text" name="title" <br>' + 
                     '<input type="file" name="fileupload"><br>' + 
