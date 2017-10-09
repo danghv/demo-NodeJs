@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demo socket.io</title>
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+        const socket = io('http://localhost:8888')
+        socket.on('news', (data) => {
+            alert(data.hello)
+        })
+        socket.emit('the other event', {
+            hello: '"hello from client"'
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

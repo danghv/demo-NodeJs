@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trang chu</title>
+    <link rel="stylesheet" href="trangchu.css">
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+        // create a connection to server
+        const socket = io('http://localhost:3000')
+        
+        socket.on('user-registry-fail', () =>{
+            alert("Someone already uses the name")
+        })
+        socket.on('user-registry-sucess', (data) => {
+            $('#sayhiTo').html(data)
+            $('#form-dangky').hide(2000)
+            $('#form-chat').show(1000)
+        })
+        socket.on('server-send-listuser', (data) => {
+            $('#list-user').html('')
+            data.forEach((i) => {
+                $('#list-user').append(
+                    "<li><span>" + i + "</span> is online</li>"
+                )
+            })
+        })
+        socket.on('server-response-data', (data) => {
+            $('#chatter-content').text(data.text)
+        })
+
+        socket.on('server-response-client-message', (data) => {
+            $('#talks').append(
+                '<div id="talk">' +
+                '<div class="chatter-name"><span>' + data.user + '</span>:'+ ' '+ '</div>' +
+                '<div id="chatter-content">' + data.message + '</div>'
+                + '</div>'
+            )
+        })
+        socket.on('someone-is-typing', (data) => {
+            $('#notification').text(data)
+        })
+        socket.on('someone-stop-typing', () => {
+            $('#notification').text('')
+        })
+
+
+        $(document).ready(() => {
+            $('#form-dangky').show()
+            $('#form-chat').hide()
+            // $('#send-button').click(() => {
+            //     socket.emit('user-send-message', {text: $('#send-input').val()})
+            // })
+            $('#registry-button').click(() => {
+                socket.emit('client-registry', $('#user-type').val())
+            })
+            $('#button-logout').click(() => {
+                socket.emit('client-logout')
+                $('#form-dangky').show(2000)
+                 $('#form-chat').hide(1000)
+            })
+            $('#send-button').click(() => {
+                socket.emit('client-send-message', $('#send-input').val())
+
+            })
+            $('#send-input').focusin(() => {
+                socket.emit('client-typing-message')
+            })
+            $('#send-input').focusout(() => {
+                socket.emit('client-stop-typing-message')
+            })            
+        })
+        
+        
+    </script>
+</head>
+<body>
+        <div id="form-dangky">
+            <h1>What is your name?</h1>
+            <div id="registry">
+                <input id="user-type" type="text">
+                <button id="registry-button">Dang ky</button>
+            </div>
+        </div>
+
+        <div id="form-chat">
+            <div class="container">
+                <div class="left-column">
+                    <div class="chat-box">
+                        <div id="talks">
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="input-box">
+                        <input id="send-input" type="text">
+                        <button id="send-button">Send</button>
+                        
+                        <p id="notification"></p>
+                    </div>
+                </div>
+                <div class="right-column">
+                    <div class="online-user">
+                        <ul id="list-user">
+                            
+                        </ul>
+                    </div>
+                    <div id="hello-user">
+                        <div id="sayHi">Hello <span id="sayhiTo"></span></div>
+                        <button id="button-logout">Log out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

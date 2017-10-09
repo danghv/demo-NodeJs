@@ -1,0 +1,53 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.chat-box {
+    background: #eee;
+    min-height: 300px;
+}
+
+.talk {
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+}
+.input-box {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+}
+
+input#send-input {
+    padding: 8px;
+}
+
+button#send-button {
+    background-color: #1157d8;
+}
+
+button#leave-button {
+    background: grey;
+}
+
+.input-box button {
+    cursor: pointer;
+}
+div#chatter-content {
+    text-align: left;
+}
+
+.chatter-name {
+    text-align: right;
+    background: #8c8283;
+}
+.right-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.online-user {
+    background: #ada2a4;
+}
+div#talk {
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+}
