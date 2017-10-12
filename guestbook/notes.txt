@@ -1,3 +1,5 @@
-Mon Oct 09 2017 11:12:44 GMT+0700 (ICT): test: test-content
-Mon Oct 09 2017 11:13:04 GMT+0700 (ICT): test2: test-content2
-Mon Oct 09 2017 11:13:30 GMT+0700 (ICT): test3: test-conten3
+Mon Oct 09 2017 15:51:14 GMT+0700 (ICT): error handling middleware: error-handling middleware has four arguments but we
+don’t use all of them. Express uses the number of arguments of a function to deter-
+mine which middleware handles errors and which doesn’t.
+Tue Oct 10 2017 11:28:58 GMT+0700 (ICT): HTTP statusCode: (Express) 'res.status(400)'  = (Raw Node)' res.statusCode = 400'
+Tue Oct 10 2017 15:33:44 GMT+0700 (ICT): anonymous self-invoking function: Closure?
