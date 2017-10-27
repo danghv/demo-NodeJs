@@ -1,0 +1,12 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+#todo-list li:hover, #doing-list li:hover, #done-list li:hover {
+    background: grey;
+    text-decoration: line-through;
+    cursor: pointer;
+}
+li {
+    padding: 8px;
+}

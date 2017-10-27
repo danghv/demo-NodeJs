@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demo Todo App</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="jquery-3.2.1.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div id="todo">
+            <h1>To Do</h1>
+            <ul id="todo-list">
+                <% todo.forEach((a) => { %>
+                    <li>
+                        <%= a.job %>
+                    </li>
+                    <% }); %>
+            </ul>
+            <label for="addTodo">
+                <input id="content-todo-job" type="text" name="addTodo" required>
+                <button id="add-todo-job">Add</button>
+            </label>
+
+
+
+        </div>
+        <div id="doing">
+
+            <h1>Doing</h1>
+            <ul id="doing-list">
+                <% doing.forEach((a) => { %>
+                    <li>
+                        <%= a.job %>
+                    </li>
+                    <% }); %>
+            </ul>
+            <label for="addDoing">
+                                        <input id="content-doing-job" type="text" name="addDoing">
+                                        <button id="add-doing-job">Add</button>
+                                </label>
+
+        </div>
+        <div id="done">
+            <h1>Done</h1>
+            <ul id="done-list">
+                <% done.forEach((a) => { %>
+                    <li>
+                        <%= a.job %>
+                    </li>
+                    <% }); %>
+            </ul>
+            <label for="addDone">
+                        <input id="content-done-job" type="text" name="addDone">
+                        <button id="add-done-job">Add</button>
+                </label>
+        </div>
+    </div>
+    <script src="todoapp.js"></script>
+</body>
+
+</html>
